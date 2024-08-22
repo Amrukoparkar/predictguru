@@ -4,69 +4,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live Voice Gender Prediction</title>
+    <title>Age and Birth Day Predictor</title>
 </head>
 
-<body style="font-family: Arial, sans-serif; background-color: #f5f5f5; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh;">
+<body style="font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f0f0f0;">
     <div style="text-align: center; background-color: white; padding: 30px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); width: 300px;">
-        <h1 style="color: #333;">Live Voice Prediction</h1>
-        <p>Click below to record a voice sample.</p>
-        <button id="record-btn" style="background-color: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Start Recording</button>
-        <div id="result" style="margin-top: 20px; font-size: 1.2em; color: #007bff;"></div>
+        <h2>Age and Birth Day Predictor</h2>
+        <input type="date" id="dob" style="padding: 10px; width: 80%; margin-bottom: 20px;">
+        <button onclick="predictAgeAndDay()" style="background-color: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Predict</button>
+        <div id="result" style="margin-top: 20px; font-size: 1.2em; color: #28a745;"></div>
     </div>
 
     <script>
-        const recordButton = document.getElementById('record-btn');
-        const resultDiv = document.getElementById('result');
-        let isRecording = false;
-        let mediaRecorder;
-        let audioChunks = [];
-
-        recordButton.addEventListener('click', () => {
-            if (!isRecording) {
-                startRecording();
-            } else {
-                stopRecording();
+        function predictAgeAndDay() {
+            const dobInput = document.getElementById("dob").value;
+            if (!dobInput) {
+                document.getElementById("result").innerText = "Please select your date of birth!";
+                return;
             }
-        });
 
-        function startRecording() {
-            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-                navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
-                    mediaRecorder = new MediaRecorder(stream);
-                    mediaRecorder.start();
-                    isRecording = true;
-                    recordButton.innerText = 'Stop Recording';
-                    resultDiv.innerText = 'Recording...';
+            const dob = new Date(dobInput);
+            const today = new Date();
 
-                    mediaRecorder.ondataavailable = event => {
-                        audioChunks.push(event.data);
-                    };
+            // Calculate age
+            const diffInMilliseconds = today - dob;
+            const ageDate = new Date(diffInMilliseconds);
+            const age = Math.abs(ageDate.getUTCFullYear() - 1970);
 
-                    mediaRecorder.onstop = () => {
-                        const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
-                        audioChunks = [];
-                        analyzeAudio(audioBlob);
-                    };
-                }).catch(err => {
-                    resultDiv.innerText = 'Microphone access is required!';
-                });
-            }
-        }
+            // Get the day of the week
+            const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            const dayBorn = daysOfWeek[dob.getDay()];
 
-        function stopRecording() {
-            mediaRecorder.stop();
-            isRecording = false;
-            recordButton.innerText = 'Start Recording';
-        }
-
-        function analyzeAudio(audioBlob) {
-            // Placeholder logic for prediction
-            // In a real scenario, you'd send the audioBlob to a server for analysis.
-            const randomPrediction = ["Man", "Woman", "Child"];
-            const prediction = randomPrediction[Math.floor(Math.random() * randomPrediction.length)];
-
-            resultDiv.innerText = `Predicted Voice: ${prediction}`;
+            // Display the result
+            document.getElementById("result").innerText = `You are ${age} years old and were born on a ${dayBorn}.`;
         }
     </script>
 </body>
