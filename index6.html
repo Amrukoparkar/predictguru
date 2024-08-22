@@ -5,14 +5,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Age and Birth Day Predictor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        .input-field {
+            padding: 10px;
+            width: 80%;
+            margin-bottom: 20px;
+        }
+
+        .button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #28a745;
+        }
+    </style>
 </head>
 
-<body style="font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f0f0f0;">
-    <div style="text-align: center; background-color: white; padding: 30px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); width: 300px;">
+<body>
+    <div class="container">
         <h2>Age and Birth Day Predictor</h2>
-        <input type="date" id="dob" style="padding: 10px; width: 80%; margin-bottom: 20px;">
-        <button onclick="predictAgeAndDay()" style="background-color: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Predict</button>
-        <div id="result" style="margin-top: 20px; font-size: 1.2em; color: #28a745;"></div>
+        <input type="date" id="dob" class="input-field">
+        <button onclick="predictAgeAndDay()" class="button">Predict</button>
+        <a href="./index.html"><button type="button" class="button">Return 2 Home</button></a></div>
+        <div id="result" class="result"></div>
     </div>
 
     <script>
