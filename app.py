@@ -1,4 +1,4 @@
-from flask import Flask, render_landing, request, jsonify
+from flask import Flask, render, request, jsonify
 import numpy as np # type: ignore
 import pickle
 
@@ -9,7 +9,7 @@ model = pickle.load(open('house_price_model.pkl', 'rb'))
 
 @app.route('/')
 def home():
-    return render_landing('index.html')
+    return render('index.html')
 
 @app.route('/predict', methods=['POST'])
 def predict():
