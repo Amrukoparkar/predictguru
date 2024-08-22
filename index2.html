@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discount Calculator</title>
+    <style>body {
+        background-color: #0a3d62;
+        color: white;
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+    
+    .container {
+        background-color: #1e3799;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        text-align: center;
+        width: 300px;
+    }
+    
+    h1 {
+        margin-bottom: 20px;
+        font-size: 24px;
+    }
+    
+    .input-group {
+        margin-bottom: 15px;
+        text-align: left;
+    }
+    
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    
+    input[type="number"] {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+    
+    button {
+        background-color: #60a3bc;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+    }
+    
+    button:hover {
+        background-color: #3c6382;
+    }
+    
+    .result {
+        margin-top: 20px;
+        font-size: 18px;
+        font-weight: bold;
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Discount Calculator</h1>
+        <form id="discount-form">
+            <div class="input-group">
+                <label for="original-price">Original Price in $:</label>
+                <input type="number" id="original-price" placeholder="Enter original price" required>
+            </div>
+            <div class="input-group">
+                <label for="discount-percentage">Discount Percentage:</label>
+                <input type="number" id="discount-percentage" placeholder="Enter discount percentage" required>
+            </div>
+            <pre><button type="button" onclick="calculateDiscount()">Calculate</button> <a href="./calcu.html"><button type="button">$ to INR</button></a>
+
+<a href="./index.html"><button type="button">Return 2 Home</button></a></pre>
+        </form>
+        <div id="result" class="result"></div>
+    </div>
+    <script>function calculateDiscount() {
+        const originalPrice = parseFloat(document.getElementById('original-price').value);
+        const discountPercentage = parseFloat(document.getElementById('discount-percentage').value);
+    
+        if (isNaN(originalPrice) || isNaN(discountPercentage)) {
+            alert('Please enter valid numbers');
+            return;
+        }
+    
+        const discountAmount = (originalPrice * discountPercentage) / 100;
+        const finalPrice = originalPrice - discountAmount;
+    
+        document.getElementById('result').innerHTML = `Discount: $${discountAmount.toFixed(2)}<br>Final Price: $${finalPrice.toFixed(2)}`;
+    }
+    </script>
+    
+</body>
+</html>

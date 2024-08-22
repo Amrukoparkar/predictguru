@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter</title>
+    <style>
+        body {
+            background-color: white;
+            color: grey;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            border: 2px solid grey;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        input[type="number"], select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid grey;
+            border-radius: 4px;
+        }
+        button {
+            background-color: grey;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: darkgrey;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Currency Converter</h2>
+        <select id="conversionType">
+            <option value="inrToUsd">Convert INR to USD</option>
+            <option value="usdToInr">Convert USD to INR</option>
+        </select>
+        <input type="number" id="amount" placeholder="Enter amount" required>
+        <button onclick="convertCurrency()">Convert</button>
+        <a href="./index.html"><button>Return 2 Home</button></a>
+        <h3 id="result"></h3>
+    </div>
+
+    <script>
+        function convertCurrency() {
+            const exchangeRate = 0.012; // 1 INR = 0.012 USD
+            const conversionType = document.getElementById("conversionType").value;
+            const amount = parseFloat(document.getElementById("amount").value);
+            let result;
+
+            if (conversionType === "inrToUsd") {
+                result = amount * exchangeRate;
+                document.getElementById("result").innerText = `${amount} INR is equal to ${result.toFixed(2)} USD`;
+            } else {
+                result = amount / exchangeRate;
+                document.getElementById("result").innerText = `${amount} USD is equal to ${result.toFixed(2)} INR`;
+            }
+        }
+    </script>
+</body>
+</html>

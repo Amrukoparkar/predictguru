@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Voice Gender Prediction</title>
+</head>
+
+<body style="font-family: Arial, sans-serif; background-color: #f5f5f5; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh;">
+    <div style="text-align: center; background-color: white; padding: 30px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); width: 300px;">
+        <h1 style="color: #333;">Live Voice Prediction</h1>
+        <p>Click below to record a voice sample.</p>
+        <button id="record-btn" style="background-color: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Start Recording</button>
+        <div id="result" style="margin-top: 20px; font-size: 1.2em; color: #007bff;"></div>
+    </div>
+
+    <script>
+        const recordButton = document.getElementById('record-btn');
+        const resultDiv = document.getElementById('result');
+        let isRecording = false;
+        let mediaRecorder;
+        let audioChunks = [];
+
+        recordButton.addEventListener('click', () => {
+            if (!isRecording) {
+                startRecording();
+            } else {
+                stopRecording();
+            }
+        });
+
+        function startRecording() {
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
+                    mediaRecorder = new MediaRecorder(stream);
+                    mediaRecorder.start();
+                    isRecording = true;
+                    recordButton.innerText = 'Stop Recording';
+                    resultDiv.innerText = 'Recording...';
+
+                    mediaRecorder.ondataavailable = event => {
+                        audioChunks.push(event.data);
+                    };
+
+                    mediaRecorder.onstop = () => {
+                        const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                        audioChunks = [];
+                        analyzeAudio(audioBlob);
+                    };
+                }).catch(err => {
+                    resultDiv.innerText = 'Microphone access is required!';
+                });
+            }
+        }
+
+        function stopRecording() {
+            mediaRecorder.stop();
+            isRecording = false;
+            recordButton.innerText = 'Start Recording';
+        }
+
+        function analyzeAudio(audioBlob) {
+            // Placeholder logic for prediction
+            // In a real scenario, you'd send the audioBlob to a server for analysis.
+            const randomPrediction = ["Man", "Woman", "Child"];
+            const prediction = randomPrediction[Math.floor(Math.random() * randomPrediction.length)];
+
+            resultDiv.innerText = `Predicted Voice: ${prediction}`;
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Education Path Predictor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 1.2em;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Education Path Predictor</h1>
+        <form id="educationPathForm">
+            <label for="interests">Select Your Interests:</label>
+            <select id="interests" required>
+                <option value="">--Choose an Option--</option>
+                <option value="science">Science</option>
+                <option value="arts">Arts</option>
+                <option value="business">Business</option>
+                <option value="technology">Technology</option>
+                <option value="engineering">Engineering</option>
+            </select>
+            
+            <label for="strengths">Select Your Strengths:</label>
+            <select id="strengths" required>
+                <option value="">--Choose an Option--</option>
+                <option value="analytical">Analytical Skills</option>
+                <option value="creative">Creative Skills</option>
+                <option value="communication">Communication Skills</option>
+                <option value="technical">Technical Skills</option>
+                <option value="problem-solving">Problem-Solving Skills</option>
+            </select>
+
+            <label for="careerAspiration">Select Your Career Aspiration:</label>
+            <select id="careerAspiration" required>
+                <option value="">--Choose an Option--</option>
+                <option value="healthcare">Healthcare</option>
+                <option value="education">Education</option>
+                <option value="finance">Finance</option>
+                <option value="technology">Technology</option>
+                <option value="creative">Creative Arts</option>
+            </select>
+            
+            <pre><button type="submit">Get Course Suggestions</button>
+                
+<a href="./index.html"><button type="button">Return 2 Home</button></a></pre>
+        </form>
+
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        document.getElementById("educationPathForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            // Get user input
+            const interests = document.getElementById("interests").value;
+            const strengths = document.getElementById("strengths").value;
+            const careerAspiration = document.getElementById("careerAspiration").value;
+
+            // Simple logic for course suggestions based on user input
+            let suggestions = "";
+
+            if (interests === "science") {
+                suggestions += "<p>Suggested Courses: Biology, Chemistry, Physics</p>";
+                suggestions += "<p>Potential Careers: Doctor, Research Scientist, Lab Technician</p>";
+            } else if (interests === "arts") {
+                suggestions += "<p>Suggested Courses: Fine Arts, Performing Arts, Literature</p>";
+                suggestions += "<p>Potential Careers: Artist, Writer, Musician</p>";
+            } else if (interests === "business") {
+                suggestions += "<p>Suggested Courses: Business Administration, Marketing, Finance</p>";
+                suggestions += "<p>Potential Careers: Business Analyst, Marketing Manager, Accountant</p>";
+            } else if (interests === "technology") {
+                suggestions += "<p>Suggested Courses: Computer Science, Information Technology, Web Development</p>";
+                suggestions += "<p>Potential Careers: Software Developer, IT Consultant, Data Analyst</p>";
+            } else if (interests === "engineering") {
+                suggestions += "<p>Suggested Courses: Civil Engineering, Mechanical Engineering, Electrical Engineering</p>";
+                suggestions += "<p>Potential Careers: Engineer, Project Manager, Quality Control Specialist</p>";
+            }
+
+            // Display result
+            document.getElementById("result").innerHTML = suggestions || "<p>Please select your preferences.</p>";
+        });
+    </script>
+</body>
+</html>

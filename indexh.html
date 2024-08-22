@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Scam Predictor</title>
+    <style>
+        /* Internal CSS */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .safe {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .scam {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Email Scam Predictor</h1>
+        <textarea id="emailContent" placeholder="Paste the email content here..."></textarea>
+        <pre><button onclick="predictScam()">Predict</button>
+            
+ <a href="./index.html"><button type="button">Return 2 Home</button></a></pre>
+
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        function predictScam() {
+            const emailContent = document.getElementById('emailContent').value;
+            const resultDiv = document.getElementById('result');
+
+            // Simple keyword-based prediction (you can replace this with a more sophisticated algorithm)
+            const scamKeywords = ["urgent", "account", "password", "click here", "free", "won", "prize"];
+            let isScam = false;
+
+            for (let keyword of scamKeywords) {
+                if (emailContent.toLowerCase().includes(keyword)) {
+                    isScam = true;
+                    break;
+                }
+            }
+
+            if (isScam) {
+                resultDiv.textContent = "This email looks suspicious. It might be a scam.";
+                resultDiv.className = "result scam";
+            } else {
+                resultDiv.textContent = "This email seems safe.";
+                resultDiv.className = "result safe";
+            }
+        }
+    </script>
+</body>
+</html>

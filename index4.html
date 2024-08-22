@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Climate Change Impact Predictor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0f7fa;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #00796b;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #004d40;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 1.2em;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Climate Change Impact Predictor</h1>
+        <form id="impactPredictorForm">
+            <label for="location">Location:</label>
+            <input type="text" id="location" required>
+            
+            <label for="sensitivity">Sensitivity to Climate Change:</label>
+            <select id="sensitivity" required>
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+            </select>
+            
+            <label for="preparedness">Preparedness Level:</label>
+            <select id="preparedness" required>
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+            </select>
+            
+           <pre> <button type="submit">Predict Climate Change Impact</button>
+            
+ <a href="./index.html"><button type="button">Return 2 Home</button></a></pre>
+        </form>
+
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        document.getElementById("impactPredictorForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            // Get user input
+            const location = document.getElementById("location").value;
+            const sensitivity = document.getElementById("sensitivity").value;
+            const preparedness = document.getElementById("preparedness").value;
+
+            // Basic impact estimation logic
+            let impactScore = 0;
+
+            if (sensitivity === "low") {
+                impactScore -= 1; // Decrease impact score for low sensitivity
+            } else if (sensitivity === "medium") {
+                impactScore += 0; // Neutral for medium sensitivity
+            } else {
+                impactScore += 1; // Increase impact score for high sensitivity
+            }
+
+            if (preparedness === "high") {
+                impactScore -= 1; // Decrease impact score for high preparedness
+            } else if (preparedness === "medium") {
+                impactScore += 0; // Neutral for medium preparedness
+            } else {
+                impactScore += 1; // Increase impact score for low preparedness
+            }
+
+            // Determine impact level
+            let impactLevel;
+            if (impactScore < 0) {
+                impactLevel = "Low Impact";
+            } else if (impactScore === 0) {
+                impactLevel = "Medium Impact";
+            } else {
+                impactLevel = "High Impact";
+            }
+
+            // Display result
+            document.getElementById("result").innerText = `Location: ${location} - Estimated Climate Change Impact: ${impactLevel}`;
+        });
+    </script>
+</body>
+</html>
